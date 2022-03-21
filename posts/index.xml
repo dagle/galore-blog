@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Galore</title>
+    <link>https://dagle.github.io/galore-blog/posts/</link>
+    <description>Recent content in Posts on Galore</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 16 Mar 2022 11:12:05 +0100</lastBuildDate><atom:link href="https://dagle.github.io/galore-blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>A Gpg ui</title>
+      <link>https://dagle.github.io/galore-blog/posts/a-gpg-tui/</link>
+      <pubDate>Wed, 16 Mar 2022 11:12:05 +0100</pubDate>
+      
+      <guid>https://dagle.github.io/galore-blog/posts/a-gpg-tui/</guid>
+      <description>Often when we work with email, it&amp;rsquo;s handy to not just verify email or decrypt the email but to add, manage and delete keys. Galore doesn&amp;rsquo;t come with such tools in of it self but it&amp;rsquo;s very easy to add one.
+Add gpg-tui gpg-tui is a cool interface to gpg. So we add that to neovim. To add it, start by installing gpg-tui and then we install toggleterm to run gpg-tui inside of it.</description>
+      <content>&lt;p&gt;Often when we work with email, it&amp;rsquo;s handy to not just verify email or decrypt the email but
+to add, manage and delete keys. Galore doesn&amp;rsquo;t come with such tools in of it self but it&amp;rsquo;s very easy to
+add one.&lt;/p&gt;
+&lt;h1 id=&#34;add-gpg-tui&#34;&gt;Add gpg-tui&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/orhun/gpg-tui&#34;&gt;gpg-tui&lt;/a&gt; is a cool interface to gpg. So we add that to neovim. To add it, start by installing gpg-tui and then we install &lt;a href=&#34;https://github.com/akinsho/toggleterm.nvim&#34;&gt;toggleterm&lt;/a&gt;
+to run gpg-tui inside of it.
+After it&amp;rsquo;s installed we can add this to any place where neovim sources code:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-lua&#34; data-lang=&#34;lua&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;local&lt;/span&gt; Terminal  &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; require(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;toggleterm.terminal&amp;#39;&lt;/span&gt;).Terminal
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;local&lt;/span&gt; gpg_tui &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Terminal:new({ cmd &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;gpg-tui&amp;#34;&lt;/span&gt;, hidden &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;, direction &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;float&amp;#34;&lt;/span&gt;})
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;local&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;gpg_tui_toggle&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  gpg_tui:toggle()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;vim.keymap.set(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;n&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;leader&amp;gt;g&amp;#34;&lt;/span&gt;, gpg_tui_toggle, {noremap &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;, silent &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;})
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;piping-a-key&#34;&gt;Piping a key&lt;/h1&gt;
+&lt;p&gt;Sometimes people send keys in email that you want to add, to add a key from an attachment:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-lua&#34; data-lang=&#34;lua&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;local&lt;/span&gt; tele &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; require(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;galore.telescope&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;local&lt;/span&gt; jobs &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; require(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;galore.jobs&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;local&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;cb&lt;/span&gt;(object)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	jobs.pipe({&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;gpg&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;--import&amp;#34;&lt;/span&gt;}, object)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tele.parts_browser(message_view.message, cb)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This will allow you to select a part and of the massage to pipe to gpg &amp;ndash;import&lt;/p&gt;
+&lt;p&gt;And thats it. Since galore/gmime handles signing, verify, encrypting, decrypting;
+you don&amp;rsquo;t need to care about that (other than configuring galore).&lt;/p&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>Galore a mail client for the modern neovimmer</title>
+      <link>https://dagle.github.io/galore-blog/posts/my-first-post/</link>
+      <pubDate>Wed, 16 Mar 2022 10:53:35 +0100</pubDate>
+      
+      <guid>https://dagle.github.io/galore-blog/posts/my-first-post/</guid>
+      <description>In this series of blog posts I write about the galore email client. I will write about development, where and what is happening etc. The posts will be about the plugin it self, configuration trix, how to make a plugin to work with galore and such. But also posts about more general stuff like neovim, mail etc that could be of intress for users.</description>
+      <content>&lt;p&gt;In this series of blog posts I write about the galore email client.
+I will write about development, where and what is happening etc. The posts will
+be about the plugin it self, configuration trix, how to make a plugin to work with
+galore and such. But also posts about more general stuff like neovim, mail etc that
+could be of intress for users.&lt;/p&gt;
+</content>
+    </item>
+    
+  </channel>
+</rss>
